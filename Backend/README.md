@@ -12,8 +12,11 @@ In the event that a player must make edits before submitting, the player will be
 
 ## Current State
 
-To run the backend run your server on port
+To run the Backend, run "rake server",  which utlizes:
 [http://localhost:9292](http://localhost:9292).
+
+To run the Frontend, run "npm start" which utilizes:
+[http://localhost:3000](http://localhost:3000).
 
 Frontend capacity only allows for the user to create a new character with seed data.  These characters will create a host of additional hashes during creation which are required during destruction.  Once created, a new fetch for all of a user's characters will be sent and read by the front-end.
 
@@ -22,3 +25,27 @@ Users may also delete characters, which will destroy any dependent hashes on the
 Currently, each of these actions are done as two seperate fetches, which needs to be reduced down to one as there is a delay.
 
 Ansyncronus shallow copies could be used to enhance performance, but may lead to issues in destruction due to "has_one" associations.
+
+## Domain Model
+The below model illustrate the relations between each table:
+
+### Tables:
+- Pink tables represent classes with user choices
+- Yellow tables represent static component libraries
+- Blue tables represent 1:1 join tables
+
+#### **NOTE**
+
+- Green tables represent Pink tables of the same name and are used only for illustration purposes.
+
+### Relationships
+- Black Solid lines represent 1:Many relationships
+- Red Solid lines represent has_one relationships
+- Black Dotted lines represent a has_through relationship
+
+#### **NOTE**
+
+- All Pink tables are Dependent: :Destroy to the level it belongs to.
+- Green lines represent that a Green table has been created for illustration purposes.
+
+<img src="./Domain_Model.png" alt="Domain Model">
